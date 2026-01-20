@@ -60,6 +60,7 @@ Ce projet suit le format [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/
 - **Champ de recherche visible sur mobile** : ajout padding et overflow-y:auto sur FilterDropdown pour garantir visibilité du champ de recherche
 - **Export CSV page principale** : bouton dans toolbar pour exporter les APs filtrées/triées avec colonnes visibles uniquement
 - **Chemin données GitHub Pages** : utilisation de import.meta.env.BASE_URL pour chargement correct sur GitHub Pages
+- **Contrôle taille de police fonctionnel** : boutons A-/A+ actifs avec 5 niveaux (-2 à +2), sauvegardé dans localStorage
 
 ### Corrigé
 - Import TypeScript de DragEndEvent (utilisation de `import type`)
