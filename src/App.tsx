@@ -25,7 +25,9 @@ function App() {
 
   useEffect(() => {
     // Load machines data
-    fetch('/data/machines.json')
+    // Utilise import.meta.env.BASE_URL pour supporter GitHub Pages
+    const dataPath = `${import.meta.env.BASE_URL}data/machines.json`;
+    fetch(dataPath)
       .then(res => res.json())
       .then(data => {
         setMachines(data);
