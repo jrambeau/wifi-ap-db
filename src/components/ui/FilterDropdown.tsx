@@ -56,14 +56,17 @@ export default function FilterDropdown({
     : availableValues;
 
   const handleSelectAll = () => {
+    console.log('[FilterDropdown] handleSelectAll called, filteredValues:', filteredValues);
     onValuesChange(new Set(filteredValues));
   };
 
   const handleDeselectAll = () => {
+    console.log('[FilterDropdown] handleDeselectAll called');
     onValuesChange(new Set());
   };
 
   const handleToggleValue = (value: string) => {
+    console.log('[FilterDropdown] handleToggleValue called, value:', value);
     const newSet = new Set(selectedValues);
     if (newSet.has(value)) {
       newSet.delete(value);
@@ -104,7 +107,15 @@ export default function FilterDropdown({
             <button
               type="button"
               className="filter-dropdown-action-btn"
-              onClick={handleSelectAll}
+              onClick={(e) => {
+                console.log('[FilterDropdown] Select All button clicked', e);
+                e.stopPropagation();
+                handleSelectAll();
+              }}
+              onMouseDown={(e) => {
+                console.log('[FilterDropdown] Select All mousedown', e);
+                e.stopPropagation();
+              }}
               disabled={filteredValues.length === 0}
             >
               Select All ({filteredValues.length})
@@ -112,7 +123,15 @@ export default function FilterDropdown({
             <button
               type="button"
               className="filter-dropdown-action-btn"
-              onClick={handleDeselectAll}
+              onClick={(e) => {
+                console.log('[FilterDropdown] Deselect All button clicked', e);
+                e.stopPropagation();
+                handleDeselectAll();
+              }}
+              onMouseDown={(e) => {
+                console.log('[FilterDropdown] Deselect All mousedown', e);
+                e.stopPropagation();
+              }}
               disabled={selectedValues.size === 0}
             >
               Deselect All
