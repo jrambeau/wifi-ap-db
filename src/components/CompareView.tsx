@@ -4,12 +4,26 @@ import { Button } from '../components/ui';
 import { IconArrowLeft, IconDownload, IconClose } from '../components/icons';
 import './CompareView.css';
 
+/**
+ * Props pour le composant CompareView
+ */
 interface Props {
   machines: APMachine[];
   onRemove: (id: string) => void;
   onBack: () => void;
 }
 
+/**
+ * Composant de comparaison côte-à-côte d'APs (max 4).
+ * Design inspiré des comparateurs Apple : épuré, aéré, avec hover de ligne complète.
+ * 
+ * Features:
+ * - Affichage en colonnes des APs sélectionnés
+ * - Ligne de features (label) sticky à gauche avec ombre
+ * - Croix de suppression en haut à droite de chaque colonne
+ * - Hover synchronisé sur toute la ligne horizontale
+ * - Export CSV de la comparaison
+ */
 export default function CompareView({ machines, onRemove, onBack }: Props) {
   if (machines.length === 0) {
     return (

@@ -3,6 +3,9 @@ import type React from 'react';
 import { IconCheck, IconClose } from '../icons';
 import './FilterDropdown.css';
 
+/**
+ * Props pour le composant FilterDropdown
+ */
 interface FilterDropdownProps {
   columnLabel: string;
   searchValue: string;
@@ -14,6 +17,19 @@ interface FilterDropdownProps {
   onClear: () => void;
 }
 
+/**
+ * Composant de filtre avec recherche + checkboxes multi-sélection.
+ * 
+ * Features:
+ * - Recherche textuelle avec auto-focus
+ * - Liste de checkboxes pour sélection multiple
+ * - Boutons "Select All" et "Deselect All"
+ * - Compteur de valeurs sélectionnées
+ * - Support clavier (Enter pour appliquer, Escape pour clear)
+ * - Sanitization XSS des valeurs affichées
+ * 
+ * @param props - Props du composant
+ */
 export default function FilterDropdown({
   columnLabel,
   searchValue,

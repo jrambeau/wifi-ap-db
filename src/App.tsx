@@ -7,6 +7,16 @@ import './App.css';
 
 type ViewMode = 'table' | 'compare';
 
+/**
+ * Composant principal de l'application Wi-Fi Access Point Database.
+ * 
+ * Gère:
+ * - Navigation entre la vue tableau et la vue comparaison
+ * - État de sélection des APs (max 4 pour comparaison)
+ * - Chargement des données depuis machines.json
+ * 
+ * @returns Application principale
+ */
 function App() {
   const [machines, setMachines] = useState<APMachine[]>([]);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());

@@ -29,12 +29,27 @@ export function getUniqueColumnValues(machines: APMachine[], columnKey: keyof AP
 }
 
 /**
- * Filtre les machines selon plusieurs critères
- * @param machines - Tableau des machines
+ * Filtre les machines selon une colonne donnée.
+ * Priorité : les valeurs sélectionnées (checkboxes) priment sur la recherche textuelle.
+ * 
+ * Logique:
+ * 1. Si selectedValues non vide : filtre par valeurs exactes (OR)
+ * 2. Sinon, si searchText non vide : filtre par recherche textuelle (LIKE, case-insensitive)
+ * 3. Sinon : retourne toutes les machines
+ * 
+ * @param machines - Liste des machines à filtrer
  * @param columnKey - Clé de la colonne
- * @param searchText - Texte de recherche (filtre inclusif)
- * @param selectedValues - Ensemble des valeurs sélectionnées (filtre exclusif)
+ * @param searchText - Texte de recherche (optionnel)
+ * @param selectedValues - Valeurs sélectionnées via checkboxes
  * @returns Machines filtrées
+ * 
+ * @example
+ * const filtered = filterMachinesByColumn(
+ *   machines,
+ *   'vendor',
+ *   '',
+ *   new Set(['Cisco', 'Aruba'])
+ * );
  */
 export function filterMachinesByColumn(
   machines: APMachine[],

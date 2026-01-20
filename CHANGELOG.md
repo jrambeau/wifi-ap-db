@@ -48,6 +48,12 @@ Ce projet suit le format [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/
 - **Titre de l'application** : "Wi-Fi Access Point Database" avec auteur "by Jonathan Rambeau" en gris clair
 - **Design CompareView inspiré Apple** : interface épurée, moins de bordures, séparateurs subtils (#f9fafb background)
 - **Header AP dans CompareView** : croix de suppression en absolute top-right (bouton circulaire hover), model/vendor centrés en gris clair
+- **Couleur de sélection uniforme** : #e8f5e9 (vert clair) sur toutes les colonnes (pinned et non-pinned)
+- **Lien auteur** : clic sur "by Jonathan Rambeau" redirige vers https://www.networkjon.fr
+- **Transition hover** : ajout de transition smooth sur les colonnes pinned pour cohérence visuelle
+- **Nettoyage du code** : suppression de 6 fichiers temporaires/backup (App 2.css, *.backup, scripts deprecated)
+- **Nettoyage de l'arborescence** : suppression des dossiers vides hooks/ et workers/ (optionnels per CONTRACT)
+- **Documentation JSDoc** : ajout de commentaires complets sur tous les composants principaux (TableView, CompareView, FilterDropdown, App, utils)
 - **Hover de ligne complète dans CompareView** : au survol d'une cellule, toute la ligne (label + toutes les colonnes AP) s'illumine avec transition 0.15s
 
 ### Corrigé

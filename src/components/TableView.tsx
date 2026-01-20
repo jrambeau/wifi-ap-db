@@ -7,6 +7,9 @@ import { IconSettings, IconClear, IconSort, IconFilter } from '../components/ico
 import { getUniqueColumnValues } from '../utils/columnFilters';
 import './TableView.css';
 
+/**
+ * Props pour le composant TableView
+ */
 interface Props {
   machines: APMachine[];
   selectedIds: Set<string>;
@@ -18,13 +21,32 @@ interface Props {
 const STORAGE_KEY_VISIBLE_COLUMNS = 'ap-catalog-visible-columns';
 const STORAGE_KEY_COLUMN_ORDER = 'ap-catalog-column-order';
 
-// Fonction pour garantir que les colonnes pinnées sont toujours en premier dans l'ordre défini
+/**
+ * Garantit que les colonnes pinned (Vendor, Model) sont toujours en premier
+ * dans l'ordre des colonnes, quel que soit l'ordre sauvegardé dans localStorage.
+ * 
+ * @param order - Ordre des clés de colonnes
+ * @param columns - Configuration des colonnes
+ * @returns Ordre avec colonnes pinned en premier
+ */
 function ensurePinnedColumnsFirst(order: string[], columns: ColumnConfig[]): string[] {
   const pinnedKeys = columns.filter(c => c.pinned).map(c => c.key as string);
   const unpinnedKeys = order.filter(key => !pinnedKeys.includes(key));
   return [...pinnedKeys, ...unpinnedKeys];
 }
 
+/**
+ * Composant principal du tableau d'APs avec filtrage, tri, pagination.
+ * 
+ * Features:
+ * - Colonnes pinned sticky (Vendor, Model)
+ * - Filtrage multi-valeurs avec checkboxes
+ * - Tri par colonne
+ * - Recherche globale
+ * - Pagination
+ * - Sélection pour comparaison (max 4)
+ * - Configuration des colonnes (show/hide, reorder)
+ */
 export default function TableView({
   machines,
   selectedIds,
