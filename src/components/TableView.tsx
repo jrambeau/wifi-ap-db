@@ -131,7 +131,7 @@ export default function TableView({
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
       // Ne pas fermer si on clique sur l'icône de filtre ou à l'intérieur du dropdown
-      if (!target.closest('.th-filter') && !target.closest('.th-filter-icon')) {
+      if (!target.closest('.th-filter') && !target.closest('.th-filter-icon') && !target.closest('.filter-dropdown')) {
         setOpenFilters(new Set());
         setDropdownPosition(null);
         setActiveFilterColumn(null);
@@ -525,6 +525,8 @@ export default function TableView({
                 left: `${dropdownPosition.left}px`,
                 zIndex: 99999
               }}
+              onMouseDown={(e) => e.stopPropagation()}
+              onClick={(e) => e.stopPropagation()}
             >
             <FilterDropdown
               columnLabel={column.label}
