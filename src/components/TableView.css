@@ -391,18 +391,8 @@
     display: none !important;
   }
 
-  /* Repositionner le filtre pour qu'il soit visible sur mobile */
-  .th-filter {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-    max-width: calc(100vw - 32px);
-    max-height: calc(100vh - 64px);
-    overflow: auto;
-  }
+  /* Note: Le positionnement du filtre est géré par JavaScript dans TableView.tsx */
+  /* Ne pas ajouter de styles position/transform ici qui écraseraient le JS */
 }
 
 @media (max-width: 640px) {
