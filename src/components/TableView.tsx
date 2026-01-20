@@ -3,7 +3,7 @@ import type React from 'react';
 import type { APMachine, ColumnConfig, ColumnFilters } from '../types';
 import { columns as defaultColumns } from '../config/columns';
 import { Button, SearchInput, ColumnSettingsModal, FilterDropdown } from '../components/ui';
-import { IconSettings, IconClear, IconSort, IconFilter } from '../components/icons';
+import { IconSettings, IconClear, IconSort, IconFilter, IconDownload } from '../components/icons';
 import { getUniqueColumnValues } from '../utils/columnFilters';
 import './TableView.css';
 
@@ -261,6 +261,33 @@ export default function TableView({
     setColumnOrder(newColumnOrder);
   };
 
+  const formatValue = (value: unknown): string => {
+    if (value === null || value === undefined) return '—';
+    if (typeof value === 'boolean') return value ? 'Yes' : 'No';
+    return String(value);
+  };
+
+  const exportCSV = () => {
+    // Exporter les machines filtrées avec les colonnes visibles
+    const headers = orderedColumns.map(c => c.label).join(',');
+    const rows = sortedMachines.map(m =>
+      orderedColumns.map(c => {
+        const val = m[c.key];
+        const formatted = formatValue(val);
+        return `"${formatted.replace(/"/g, '""')}"`;
+      }).join(',')
+    );
+    
+    const csv = [headers, ...rows].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `ap-catalog-${Date.now()}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   // Get ordered and filtered columns
   const orderedColumns = validatedColumnOrder
     .map(key => defaultColumns.find(c => c.key === key))
@@ -286,6 +313,16 @@ export default function TableView({
         </div>
 
         <div className="table-toolbar-right">
+          <Button
+            variant="secondary"
+            size="sm"
+            icon={<IconDownload size={16} />}
+            onClick={exportCSV}
+            title={`Export ${sortedMachines.length} APs to CSV`}
+          >
+            Export CSV
+          </Button>
+
           <Button
             variant="secondary"
             size="sm"
