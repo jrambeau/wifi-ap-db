@@ -420,15 +420,22 @@ export default function TableView({
                             } else {
                               newSet.clear(); // Fermer les autres dropdowns
                               newSet.add(column.key);
-                              // Calculer la position du dropdown avec offset pour mobile
-                              const isMobile = window.innerWidth < 768;
-                              const topOffset = isMobile ? 8 : 0; // Espace supplémentaire sur mobile
-                              const leftOffset = isMobile ? Math.max(0, rect.left - 10) : rect.left; // Padding latéral sur mobile
+                              // Calculer la position du dropdown
+                              const isMobile = window.innerWidth < 480;
                               
-                              setDropdownPosition({
-                                top: rect.bottom + window.scrollY + topOffset,
-                                left: leftOffset + window.scrollX
-                              });
+                              if (isMobile) {
+                                // Sur mobile : centré comme un popup
+                                setDropdownPosition({
+                                  top: -1, // Valeur spéciale pour indiquer le mode mobile
+                                  left: -1
+                                });
+                              } else {
+                                // Sur desktop/tablette : sous le bouton
+                                setDropdownPosition({
+                                  top: rect.bottom + window.scrollY,
+                                  left: rect.left + window.scrollX
+                                });
+                              }
                               setActiveFilterColumn(column.key);
                             }
                             return newSet;
@@ -489,16 +496,36 @@ export default function TableView({
         const column = orderedColumns.find(c => c.key === activeFilterColumn);
         if (!column) return null;
         
+        const isMobilePopup = dropdownPosition.top === -1;
+        
         return (
-          <div 
-            className="th-filter"
-            style={{
-              position: 'fixed',
-              top: `${dropdownPosition.top}px`,
-              left: `${dropdownPosition.left}px`,
-              zIndex: 99999
-            }}
-          >
+          <>
+            {/* Overlay mobile */}
+            {isMobilePopup && (
+              <div 
+                className="th-filter-overlay"
+                onClick={() => {
+                  setActiveFilterColumn(null);
+                  setDropdownPosition(null);
+                  setOpenFilters(new Set());
+                }}
+              />
+            )}
+            <div 
+              className={`th-filter ${isMobilePopup ? 'th-filter--mobile' : ''}`}
+              style={isMobilePopup ? {
+                position: 'fixed',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                zIndex: 100000
+              } : {
+                position: 'fixed',
+                top: `${dropdownPosition.top}px`,
+                left: `${dropdownPosition.left}px`,
+                zIndex: 99999
+              }}
+            >
             <FilterDropdown
               columnLabel={column.label}
               searchValue={columnFilters[activeFilterColumn]?.search || ''}
@@ -533,6 +560,7 @@ export default function TableView({
               }}
             />
           </div>
+          </>
         );
       })()}
 

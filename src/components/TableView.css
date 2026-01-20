@@ -135,13 +135,25 @@
   overflow-y: auto;
 }
 
-/* Adaptation mobile : dropdown plus petit et mieux positionné */
-@media (max-width: 768px) {
-  .th-filter {
-    max-height: 300px;
-    max-width: calc(100vw - 20px);
-    border-radius: var(--border-radius-md);
-  }
+/* Overlay pour mobile */
+.th-filter-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99999;
+}
+
+/* Mode popup mobile : centré comme un modal */
+.th-filter--mobile {
+  width: calc(100vw - 40px);
+  max-width: 320px;
+  max-height: 70vh;
+  border-radius: var(--border-radius-lg, 12px);
+  border: 1px solid var(--color-border-default);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
 }
 
 .th-filter-floating {
