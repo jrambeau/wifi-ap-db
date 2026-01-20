@@ -55,6 +55,11 @@ Ce projet suit le format [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/
 - **Nettoyage de l'arborescence** : suppression des dossiers vides hooks/ et workers/ (optionnels per CONTRACT)
 - **Documentation JSDoc** : ajout de commentaires complets sur tous les composants principaux (TableView, CompareView, FilterDropdown, App, utils)
 - **Hover de ligne complète dans CompareView** : au survol d'une cellule, toute la ligne (label + toutes les colonnes AP) s'illumine avec transition 0.15s
+- **Responsive mobile** : colonnes pinned désactivées sur écrans < 768px pour meilleur scroll horizontal
+- **Filtres responsive mobile** : dropdown en modal centré fixe avec box-shadow, max-width 90vw, overflow-y auto
+- **Champ de recherche visible sur mobile** : ajout padding et overflow-y:auto sur FilterDropdown pour garantir visibilité du champ de recherche
+- **Export CSV page principale** : bouton dans toolbar pour exporter les APs filtrées/triées avec colonnes visibles uniquement
+- **Chemin données GitHub Pages** : utilisation de import.meta.env.BASE_URL pour chargement correct sur GitHub Pages
 
 ### Corrigé
 - Import TypeScript de DragEndEvent (utilisation de `import type`)
@@ -74,6 +79,8 @@ Ce projet suit le format [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/
 - **Débordement de la searchbar** : ajout de `min-width: 0` sur le champ de recherche pour empêcher le débordement
 - **Taille du conteneur de filtre** : suppression des contraintes `right: 0`, `width`, `padding` et `gap` sur `.th-filter` pour qu'il s'adapte automatiquement à la taille du composant `FilterDropdown` (min-width: 250px, max-width: 400px)
 - **Padding du conteneur de filtre** : ajout de `padding: 5px` sur `.th-filter` pour espacer visuellement le dropdown du bord de son conteneur
+- **Champ recherche invisible sur mobile** : ajout overflow-y:auto et padding sur FilterDropdown mobile pour que le champ de recherche reste visible et accessible
+- **ESLint Date.now()** : remplacement de Date.now() par Date.toISOString() pour conformité React purity rules
 
 ## [1.0.0] - 2026-01-20
 
