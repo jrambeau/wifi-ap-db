@@ -5,6 +5,19 @@ Ce projet suit le format [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/
 ## [Non publié]
 
 ### Ajouté
+- **Bouton d'information dans la topbar** : 
+  - Nouveau bouton avec icône point d'interrogation (IconHelp) à droite du contrôle de taille de police
+  - Affiche un modal d'information avec les détails du build et du contact
+- **Modal d'information (InfoModal)** :
+  - Affiche la version de l'application (1.0.0)
+  - **Date ET heure du dernier build** pour vérifier que GitHub Pages a déployé la dernière version
+  - Dernier commit GitHub (hash court)
+  - Informations de contact : Jonathan Rambeau, jonathan.rambeau@axians.com
+  - Qualifications : WiFi Expert, CWNE (Certified Wireless Network Expert)
+  - Employeur : Axians C&S, Lyon, France
+  - Modal responsive avec design cohérent selon CHARTER.md
+- **IconHelp** : nouvelle icône SVG réutilisable pour le bouton d'aide
+- **Tests pour InfoModal** : 15 tests couvrant rendu, informations affichées, interactions, email link, fermeture
 - **Tests complets pour TableView** :
   - TableView.test.tsx (12 tests) : rendu, sélection, highlight, colonnes pinnées, recherche, pagination
   - Test spécifique pour vérifier le highlighting des colonnes pinnées quand une ligne est sélectionnée

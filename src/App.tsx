@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 import type { APMachine } from './types';
 import TableView from './components/TableView';
 import CompareView from './components/CompareView';
-import { FontSizeControl } from './components/ui';
+import { FontSizeControl, InfoModal } from './components/ui';
+import { IconHelp } from './components/icons';
+import Button from './components/ui/Button';
 import './App.css';
 
 type ViewMode = 'table' | 'compare';
@@ -22,6 +24,7 @@ function App() {
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
   const [viewMode, setViewMode] = useState<ViewMode>('table');
+  const [showInfoModal, setShowInfoModal] = useState(false);
 
   useEffect(() => {
     // Load machines data
@@ -91,6 +94,12 @@ function App() {
           </div>
           <div className="app-header-actions">
             <FontSizeControl />
+            <Button
+              variant="ghost"
+              icon={<IconHelp size={18} />}
+              onClick={() => setShowInfoModal(true)}
+              aria-label="About and information"
+            />
           </div>
         </div>
       </header>
@@ -112,6 +121,8 @@ function App() {
           />
         )}
       </main>
+
+      {showInfoModal && <InfoModal onClose={() => setShowInfoModal(false)} />}
     </div>
   );
 }

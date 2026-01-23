@@ -10,3 +10,4 @@ export { default as IconGripVertical } from './IconGripVertical';
 export { default as IconArrowLeft } from './IconArrowLeft';
 export { default as IconDownload } from './IconDownload';
 export { default as IconFilter } from './IconFilter';
+export { default as IconHelp } from './IconHelp';
