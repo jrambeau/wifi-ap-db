@@ -300,12 +300,16 @@
   background: var(--color-bg-subtle);
 }
 
-.ap-table tbody tr.row-selected td.column-pinned {
+.ap-table tbody tr.tr-selectable:hover td.column-pinned {
+  background: #e3f2fd;
+}
+
+.ap-table tbody tr.tr-selected td.column-pinned {
   background: #e8f5e9;
 }
 
-.ap-table tbody tr.row-selected:hover td.column-pinned {
-  background: #e8f5e9;
+.ap-table tbody tr.tr-selected:hover td.column-pinned {
+  background: #c8e6c9;
 }
 
 /* Ombre à droite des colonnes pinnées pour indiquer le scroll */

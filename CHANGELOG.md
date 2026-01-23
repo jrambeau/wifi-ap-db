@@ -5,10 +5,50 @@ Ce projet suit le format [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/
 ## [Non publié]
 
 ### Ajouté
+- **Tests complets pour TableView** :
+  - TableView.test.tsx (12 tests) : rendu, sélection, highlight, colonnes pinnées, recherche, pagination
+  - Test spécifique pour vérifier le highlighting des colonnes pinnées quand une ligne est sélectionnée
+- **Fichier de types TypeScript pour les tests** :
+  - tests/setup.d.ts : déclaration des types pour les matchers jest-dom
+- **Tests complets pour composants UI critiques** :
+  - Button.test.tsx (16 tests) : toutes variantes, tailles, icônes, événements
+  - SearchInput.test.tsx (11 tests) : rendu, événements, clear button conditionnel
+  - FontSizeControl.test.tsx (13 tests) : niveaux, localStorage, limites, reset
+  - ColumnSettingsModal.test.tsx (20 tests) : modal complet, recherche, checkboxes, locked columns, drag&drop
+  - App.test.tsx (9 tests) : chargement, fetch, header, erreurs
+- **Tests E2E Playwright fonctionnels** :
+  - basic.spec.ts (3 tests) : homepage loads, search functionality, comparison workflow
+  - ✅ Tous les tests E2E passent avec Node 20 et browsers installés
+- **Document TESTS_COVERAGE.md** : rapport détaillé de la couverture des tests
+- **119 tests unitaires + 3 tests E2E** avec 100% de succès
+
+### Modifié
+- **Configuration Vitest** : passage de `jsdom` à `happy-dom` pour résoudre les erreurs ESM avec Node 18
+- **CompareView.test.tsx** : retrait de la dépendance `react-router-dom` (non utilisée dans l'app)
+- **Tests E2E** : adaptation aux sélecteurs et workflow réels de l'application
+  - Correction du titre attendu : "Wi-Fi Access Point Database"
+  - Correction du sélecteur de recherche : `.search-input__field`
+  - Correction du workflow de comparaison : activation du mode Select puis clic sur ligne
+
+### Corrigé
+- **🎯 Highlight des lignes sélectionnées** : correction du CSS pour appliquer le background vert aux colonnes pinnées (Vendor, Model) quand une ligne est sélectionnée
+  - Problème : les colonnes pinnées ne prenaient pas la couleur de sélection
+  - Cause : classe CSS incorrecte (`.row-selected` au lieu de `.tr-selected`)
+  - Solution : ajout de règles CSS `.ap-table tbody tr.tr-selected td.column-pinned` et `.ap-table tbody tr.tr-selectable:hover td.column-pinned`
+  - Les colonnes pinnées héritent maintenant correctement du background de leur ligne parente (vert pour sélection, bleu pour hover)
+- **Erreurs TypeScript dans les tests** : ajout de `beforeEach` et `afterEach` dans les imports de App.test.tsx
+- **Erreurs TypeScript ColumnSettingsModal.test.tsx** : ajout des propriétés `sortable` et `filterable` dans les mock columns
+- **Erreur ESM html-encoding-sniffer** : résolu par l'utilisation de happy-dom au lieu de jsdom
+- **Tests E2E** : maintenant fonctionnels avec Node 20 (activé via `nvm use 20`)
+- **Browsers Playwright** : installés avec `npx playwright install --with-deps chromium`
+
+---
+
+### Ajouté (précédent)
 - **Adaptation mobile du dropdown de filtre** : offset vertical de 8px sur mobile pour éviter que le dropdown cache le champ de recherche
 - **Media query mobile** : max-height réduite (300px), max-width adaptatif (100vw - 20px), border-radius ajouté
 
-### Modifié
+### Modifié (précédent)
 - **Calcul position dropdown** : détection `window.innerWidth < 768` pour appliquer des offsets adaptés sur mobile/tablette
 
 ## [Précédent]

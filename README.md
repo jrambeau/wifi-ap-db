@@ -91,6 +91,7 @@ Voir [ARCHITECTURE.md](ARCHITECTURE.md) pour la documentation complète de l'arc
 - `npm run lint` - Linter le code
 - `npm run format` - Formatter le code
 - `npm run audit` - Audit de sécurité npm
+- pour utiliser node 20 > `nvm use 20`
 
 ## Comment contribuer des données
 
