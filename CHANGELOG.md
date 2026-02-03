@@ -4,6 +4,10 @@ Ce projet suit le format [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/
 
 ## [Non publié]
 
+### Modifié
+- UI: boutons — la couleur du texte passe en noir au survol (hover). (voir `src/components/ui/Button.css`)
+
+
 ## [1.3.0] - 2026-01-23
 
 ### Ajouté
