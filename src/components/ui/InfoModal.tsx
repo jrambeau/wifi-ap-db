@@ -14,7 +14,7 @@ export default function InfoModal({ onClose }: InfoModalProps) {
   const staticBuildDate = new Date(__BUILD_TIMESTAMP__);
   
   const buildInfo = {
-    version: '1.3.7',
+    version: '1.3.8',
     // Static build date & time (when npm run build was executed)
     buildDateTime: staticBuildDate.toLocaleString('en-US', {
       year: 'numeric',
