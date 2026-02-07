@@ -8,12 +8,16 @@ export default function IconFilter({ size = 24, className = '' }: IconFilterProp
     <svg
       width={size}
       height={size}
-      viewBox="0 0 32 32"
-      fill="currentColor"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
-      <path d="M30 6.749h-28c-0.69 0-1.25 0.56-1.25 1.25s0.56 1.25 1.25 1.25v0h28c0.69 0 1.25-0.56 1.25-1.25s-0.56-1.25-1.25-1.25v0zM24 14.75h-16c-0.69 0-1.25 0.56-1.25 1.25s0.56 1.25 1.25 1.25v0h16c0.69 0 1.25-0.56 1.25-1.25s-0.56-1.25-1.25-1.25v0zM19 22.75h-6.053c-0.69 0-1.25 0.56-1.25 1.25s0.56 1.25 1.25 1.25v0h6.053c0.69 0 1.25-0.56 1.25-1.25s-0.56-1.25-1.25-1.25v0z" />
+      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
     </svg>
   );
 }

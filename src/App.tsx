@@ -82,7 +82,9 @@ function App() {
       <header className="app-header">
         <div className="app-header-content">
           <div className="app-title-container">
-            <h1 className="app-title">Wi-Fi Access Point Database</h1>
+            <a href="https://ap.networkjon.fr" className="app-title-link">
+              <h1 className="app-title">Wi-Fi Access Point Database</h1>
+            </a>
           </div>
           <div className="app-header-actions">
             <FontSizeControl />

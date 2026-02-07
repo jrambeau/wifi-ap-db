@@ -64,7 +64,7 @@ export default function TableView({
   
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const [perPage, setPerPage] = useState(25);
+  const [perPage, setPerPage] = useState(100);
   
   // Selection mode
   const [selectionMode, setSelectionMode] = useState(false);

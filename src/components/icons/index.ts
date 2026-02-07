@@ -11,3 +11,4 @@ export { default as IconArrowLeft } from './IconArrowLeft';
 export { default as IconDownload } from './IconDownload';
 export { default as IconFilter } from './IconFilter';
 export { default as IconHelp } from './IconHelp';
+export { default as IconWifiAP } from './IconWifiAP';
