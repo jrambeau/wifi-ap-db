@@ -46,13 +46,14 @@ describe('InfoModal', () => {
     expect(screen.getByText(/Lyon, France/)).toBeInTheDocument();
   });
 
-  it('displays email link', () => {
+  it('displays LinkedIn link', () => {
     const mockClose = vi.fn();
     render(<InfoModal onClose={mockClose} />);
     
-    const emailLink = screen.getByText('jonathan.rambeau@axians.com');
-    expect(emailLink).toBeInTheDocument();
-    expect(emailLink.closest('a')).toHaveAttribute('href', 'mailto:jonathan.rambeau@axians.com');
+    const linkedinLink = screen.getByText('LinkedIn Profile');
+    expect(linkedinLink).toBeInTheDocument();
+    expect(linkedinLink.closest('a')).toHaveAttribute('href', 'https://www.linkedin.com/in/jonathan-rambeau-987a58225/');
+    expect(linkedinLink.closest('a')).toHaveAttribute('target', '_blank');
   });
 
   it('displays contact message in English', () => {

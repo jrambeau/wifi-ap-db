@@ -105,16 +105,6 @@ describe('App', () => {
     });
   });
 
-  it('renders author link', async () => {
-    render(<App />);
-    
-    await waitFor(() => {
-      const authorLink = screen.getByText('by Jonathan Rambeau');
-      expect(authorLink).toBeInTheDocument();
-      expect(authorLink.closest('a')).toHaveAttribute('href', 'https://www.networkjon.fr');
-    });
-  });
-
   it('loads machines data on mount', async () => {
     render(<App />);
     

@@ -30,7 +30,7 @@ export default function InfoModal({ onClose }: InfoModalProps) {
 
   const contact = {
     name: 'Jonathan Rambeau',
-    email: 'jonathan.rambeau@axians.com',
+    linkedin: 'https://www.linkedin.com/in/jonathan-rambeau-987a58225/',
     title: 'WiFi Expert, CWNE',
     company: 'Axians C&S',
     location: 'Lyon, France',
@@ -82,10 +82,12 @@ export default function InfoModal({ onClose }: InfoModalProps) {
               </p>
               <p>
                 <a
-                  href={`mailto:${contact.email}`}
+                  href={contact.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="info-modal__contact-link"
                 >
-                  {contact.email}
+                  LinkedIn Profile
                 </a>
               </p>
             </div>

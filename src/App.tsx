@@ -83,14 +83,6 @@ function App() {
         <div className="app-header-content">
           <div className="app-title-container">
             <h1 className="app-title">Wi-Fi Access Point Database</h1>
-            <a 
-              href="https://www.networkjon.fr" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="app-author"
-            >
-              by Jonathan Rambeau
-            </a>
           </div>
           <div className="app-header-actions">
             <FontSizeControl />
