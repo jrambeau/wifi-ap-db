@@ -2,7 +2,7 @@
 
 ## Méthode 1 : Screenshot du site (recommandé)
 
-1. Ouvre ton site : https://acstln.github.io/apspec/
+1. Ouvre ton site : https://ap.networkjon.fr
 2. Ajuste la fenêtre du navigateur à **1200x630px** (utilise les DevTools)
 3. Prends une capture d'écran propre
 4. Sauvegarde comme `og-image.png` dans `/public/`
@@ -105,10 +105,9 @@ Pour l'instant, j'ai créé un placeholder. Tu peux le remplacer plus tard avec 
 
 Une fois l'image créée :
 
-1. **Build et push** :
+1. **Commit et push** (le déploiement se fait ensuite automatiquement via CI) :
    ```bash
-   npm run build
-   git add public/og-image.png docs/og-image.png
+   git add public/og-image.png
    git commit -m "feat: Add Open Graph preview image"
    git push origin main
    ```
@@ -118,7 +117,7 @@ Une fois l'image créée :
    - [Twitter Card Validator](https://cards-dev.twitter.com/validator)
    - [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/)
 
-3. Entre ton URL : `https://acstln.github.io/apspec/`
+3. Entre ton URL : `https://ap.networkjon.fr`
 
 ## Notes importantes
 

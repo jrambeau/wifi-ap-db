@@ -28,6 +28,34 @@ nvm alias default 20
 #### Via téléchargement direct
 Télécharger depuis [nodejs.org](https://nodejs.org/)
 
+#### Bascule automatique de version avec nvm
+
+Le fichier `.nvmrc` à la racine épingle Node 20. `nvm use` lit ce fichier
+automatiquement. Pour basculer la version en entrant dans le dossier, ajoutez
+ce hook à votre `~/.zshrc` :
+
+```bash
+# Auto-switch node version avec nvm
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+```
+
 ## Installation du projet
 
 ### Première installation
@@ -35,7 +63,7 @@ Télécharger depuis [nodejs.org](https://nodejs.org/)
 ```bash
 # Cloner le repository
 git clone <repo-url>
-cd apspec
+cd wifi-ap-db
 
 # Installer les dépendances (utilise package-lock.json)
 npm ci
@@ -125,18 +153,18 @@ npm run export-csv
 
 ## Checklist avant déploiement
 
-Avant chaque push du dossier `/docs` sur la branche `main` :
+Le déploiement est automatique : un push sur `main` déclenche le workflow
+GitHub Actions qui build et publie sur GitHub Pages. Avant de pusher :
 
 - [ ] `npm ci` - Installation propre des dépendances
 - [ ] `npm run lint` - Pas d'erreurs de linting
 - [ ] `npm run test` - Tous les tests passent
 - [ ] `npm run validate-data` - Données valides
-- [ ] `npm run generate-index` - Index généré
-- [ ] `npm run build` - Build réussi
-- [ ] `npm run preview` - Vérification locale
-- [ ] Vérifier les meta tags OG dans `public/index.html`
+- [ ] `npm run generate-index` - Index généré (si données modifiées)
+- [ ] `npm run build` - Build réussi en local
+- [ ] `npm run preview` - Vérification locale du build
 - [ ] Mettre à jour `CHANGELOG.md`
-- [ ] Commit du dossier `docs/` et push
+- [ ] Commit et push sur `main`
 
 ## Conventions Git
 
@@ -230,5 +258,4 @@ Créer `.vscode/settings.json` :
 
 Pour toute question ou problème :
 - Consulter [ARCHITECTURE.md](ARCHITECTURE.md)
-- Consulter [CONTRACT.md](CONTRACT.md)
 - Ouvrir une issue sur GitHub

@@ -226,7 +226,12 @@ Pas de Redux/Zustand : l'état est suffisamment simple pour Context API.
 
 ## Build et déploiement
 
-### Workflow local
+Le déploiement est **automatisé via GitHub Actions**
+([.github/workflows/deploy.yml](../.github/workflows/deploy.yml)). Le build
+n'est pas commité : il est généré en CI à chaque push sur `main` et publié sur
+GitHub Pages.
+
+### Workflow développeur
 
 ```
 1. npm ci                    # Install dependencies
@@ -234,33 +239,30 @@ Pas de Redux/Zustand : l'état est suffisamment simple pour Context API.
 3. npm run generate-index    # Generate search index
 4. npm run lint              # Lint code
 5. npm test                  # Run all tests
-6. npm run build             # Build to /docs
+6. npm run build             # Build to /dist (vérification locale)
 7. npm run preview           # Verify locally
-8. git add docs/             # Stage build
-9. git commit -m "..."       # Commit
-10. git push origin main     # Deploy
+8. git commit -m "..."       # Commit (sans dist/)
+9. git push origin main      # Déclenche le déploiement CI
+```
+
+### Pipeline CI (GitHub Actions)
+
+```
+push sur main
+    ↓
+job build : npm ci → validate-data → npm run build (→ dist/)
+    ↓
+upload-pages-artifact (dist/)
+    ↓
+job deploy : actions/deploy-pages → GitHub Pages
 ```
 
 ### Configuration GitHub Pages
 
-- **Branch**: main
-- **Folder**: /docs
-- **Base path**: `./` (configuré dans vite.config.ts)
-- **File `.nojekyll`**: Présent dans /docs (créé par postbuild.js)
-
-### Build process
-
-```
-npm run build
-    ↓
-tsc (type checking)
-    ↓
-vite build --outDir docs
-    ↓
-scripts/postbuild.js (create .nojekyll)
-    ↓
-/docs ready for deployment
-```
+- **Source**: GitHub Actions (Settings → Pages → Source)
+- **Base path**: `./` (configuré dans `vite.config.ts`)
+- **Domaine custom**: `ap.networkjon.fr` via `public/CNAME` (copié dans le build)
+- **`.nojekyll`**: `public/.nojekyll`, copié automatiquement par Vite
 
 ## Tests
 
@@ -316,7 +318,7 @@ Si besoin d'un backend plus tard :
 - Database (PostgreSQL recommended)
 - Garder le front actuel, remplacer data loading
 
-**Important**: Toute migration majeure nécessite mise à jour CONTRACT.md et validation admin.
+**Important**: Toute migration majeure nécessite mise à jour de ce document et validation admin.
 
 ## Décisions d'architecture
 

@@ -1,6 +1,8 @@
-# Catalogue AP Wifi
+# Wi-Fi Access Points Database
 
 Application web de gestion et comparaison de points d'accès WiFi.
+
+🌐 En production : [ap.networkjon.fr](https://ap.networkjon.fr)
 
 ## Description
 
@@ -14,23 +16,24 @@ Single Page Application (SPA) développée en React + Vite + TypeScript permetta
 ## Quick Start
 
 ### Prérequis
-- Node.js 20 LTS ou supérieur
+- Node.js 20 LTS ou supérieur (cf. `.nvmrc`)
 - npm 10 ou supérieur
 
 ### Installation
 
 ```bash
 # Cloner le repository
-git clone <repo-url>
-cd apspec
+git clone https://github.com/jrambeau/wifi-ap-db.git
+cd wifi-ap-db
+
+# Utiliser la bonne version de Node
+nvm use
 
 # Installer les dépendances
 npm ci
 
-# Valider les données
+# Valider les données et générer l'index de recherche
 npm run validate-data
-
-# Générer l'index de recherche
 npm run generate-index
 
 # Lancer le serveur de développement
@@ -40,58 +43,43 @@ npm run dev
 ### Build pour production
 
 ```bash
-# Build complet (génère dans /docs)
+# Build complet (génère dans /dist)
 npm run build
 
 # Preview local du build
-npm run preview
+npm run preview   # http://localhost:4173
 ```
-
-Le site est accessible sur `http://localhost:4173` après le build.
 
 ## Tests
 
 ```bash
-# Tests unitaires
-npm run test:unit
-
-# Tests e2e
-npm run test:e2e
-
-# Tous les tests
-npm test
+npm run test:unit   # Tests unitaires (Vitest)
+npm run test:e2e    # Tests e2e (Playwright)
+npm test            # Tous les tests
 ```
 
-## Déploiement sur GitHub Pages
+## Déploiement
 
-Le projet est configuré pour être déployé sur GitHub Pages depuis la branche `main` avec le dossier `/docs`.
+Le déploiement est **automatique via GitHub Actions** ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)).
 
-### Procédure manuelle :
+À chaque push sur `main`, le workflow build l'application et la publie sur GitHub Pages. Le dossier `dist/` n'est **pas** commité (il est généré en CI).
 
-1. Vérifier la checklist avant déploiement (voir [PREREQUIS.md](PREREQUIS.md))
-2. Exécuter le build local : `npm run build`
-3. Vérifier localement : `npm run preview`
-4. Commit le dossier `/docs` : `git add docs && git commit -m "Build production"`
-5. Push sur main : `git push origin main`
-6. Configurer GitHub Pages : Settings → Pages → Branch: main, Folder: /docs
+> **Configuration GitHub (une seule fois)** : Settings → Pages → Source → **GitHub Actions**.
 
-## Structure du projet
-
-Voir [ARCHITECTURE.md](ARCHITECTURE.md) pour la documentation complète de l'architecture.
+Le domaine personnalisé `ap.networkjon.fr` est servi via le fichier [public/CNAME](public/CNAME), copié automatiquement dans le build.
 
 ## Scripts disponibles
 
 - `npm run dev` - Serveur de développement
-- `npm run build` - Build de production
+- `npm run build` - Build de production (dans `dist/`)
 - `npm run preview` - Preview du build
 - `npm run generate-index` - Générer l'index de recherche
-- `npm run validate-data` - Valider machines.json
+- `npm run validate-data` - Valider `machines.json`
 - `npm run export-csv` - Exporter les données en CSV
 - `npm test` - Lancer tous les tests
 - `npm run lint` - Linter le code
 - `npm run format` - Formatter le code
 - `npm run audit` - Audit de sécurité npm
-- pour utiliser node 20 > `nvm use 20`
 
 ## Comment contribuer des données
 
@@ -100,44 +88,17 @@ Voir [ARCHITECTURE.md](ARCHITECTURE.md) pour la documentation complète de l'arc
 3. Valider localement : `npm run validate-data`
 4. Ouvrir une Pull Request avec le fichier modifié
 
-Ou contacter l'administrateur du projet pour soumettre vos données.
+La source de vérité des données est **`public/data/machines.json`** (et son index `public/data/index.json`).
 
 ## Documentation
 
-- [CONTRACT.md](CONTRACT.md) - Contrat de développement (référence impérative)
-- [ARCHITECTURE.md](ARCHITECTURE.md) - Architecture détaillée
-- [PREREQUIS.md](PREREQUIS.md) - Prérequis et installation
-- [CHARTER.md](CHARTER.md) - Charte graphique
-- [CHANGELOG.md](CHANGELOG.md) - Historique des modifications
+La documentation détaillée se trouve dans [`docs/`](docs/) :
+
+- [ARCHITECTURE.md](docs/ARCHITECTURE.md) - Architecture détaillée
+- [PREREQUIS.md](docs/PREREQUIS.md) - Prérequis, installation, conventions Git
+- [CHARTER.md](docs/CHARTER.md) - Charte graphique
+- [CHANGELOG.md](docs/CHANGELOG.md) - Historique des modifications
 
 ## Licence
 
 Propriétaire - Tous droits réservés
-
-## Auteur
-
-acstln - Axians
-
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```

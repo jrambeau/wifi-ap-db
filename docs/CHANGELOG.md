@@ -5,7 +5,15 @@ Ce projet suit le format [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/
 ## [Non publié]
 
 ### Modifié
+- **Déploiement** : migration de GitHub Pages « deploy from branch /docs » vers **GitHub Actions** (`.github/workflows/deploy.yml`). Le build n'est plus commité.
+- **Sortie de build** : `docs/` → `dist/` (gitignoré). Le dossier `docs/` héberge désormais la documentation.
+- **Documentation** : consolidation des fichiers `.md` à la racine dans `docs/` (ARCHITECTURE, CHARTER, CHANGELOG, PREREQUIS, OPEN_GRAPH_IMAGE) ; seul `README.md` reste à la racine.
 - UI: boutons — la couleur du texte passe en noir au survol (hover). (voir `src/components/ui/Button.css`)
+
+### Supprimé
+- `CONTRACT.md` (contrat de spécification initial, obsolète).
+- `DEPLOY.md`, `NODE_VERSION_SETUP.md`, `TESTS_COVERAGE.md` (notes datées/redondantes, fusionnées ou périmées).
+- `scripts/postbuild.js` (la copie de `CNAME`/`.nojekyll` est gérée nativement par Vite via `public/`).
 
 
 ## [1.3.0] - 2026-01-23

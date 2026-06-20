@@ -1,2 +1,0 @@
-id,model,manufacturer,frequency,wifi_standard,max_clients,throughput_mbps,antenna_count,antenna_type,power_w,poe_type,ethernet_ports,ethernet_speed,mounting,indoor_outdoor,dimensions,weight_kg,operating_temp,ip_rating,mimo,mu_mimo,beamforming,mesh_capable,management_system,price_eur,warranty_years
-ap-template,Model Name,Manufacturer Name,2.4/5 GHz,Wi-Fi 6,256,1775,4,Internal,15.4,802.3af,1,1Gbps,Ceiling,Indoor,180 x 180 x 35 mm,0.5,0°C to 50°C,N/A,2x2:2,true,true,true,Management System,500,3
