@@ -18,7 +18,8 @@
     "format": "prettier --write .",
     "audit": "npm audit --audit-level=moderate",
     "export-csv": "node ./scripts/export-csv.js",
-    "validate-data": "node ./scripts/validate-data.js"
+    "validate-data": "node ./scripts/validate-data.js",
+    "generate-logo": "node ./scripts/generate-logo-assets.js"
   },
   "dependencies": {
     "@dnd-kit/core": "6.3.1",

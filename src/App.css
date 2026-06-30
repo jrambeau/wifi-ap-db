@@ -43,6 +43,9 @@
 
 .app-title-icon {
   flex-shrink: 0;
+  display: block;
+  width: 2rem;
+  height: 2rem;
 }
 
 .app-title {
@@ -121,5 +124,10 @@
 
   .app-title {
     font-size: var(--font-size-lg);
+  }
+
+  .app-title-icon {
+    width: 1.75rem;
+    height: 1.75rem;
   }
 }

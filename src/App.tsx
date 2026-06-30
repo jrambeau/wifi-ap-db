@@ -83,6 +83,14 @@ function App() {
         <div className="app-header-content">
           <div className="app-title-container">
             <a href="https://ap.networkjon.fr" className="app-title-link">
+              <img
+                className="app-title-icon"
+                src={`${import.meta.env.BASE_URL}logo.svg`}
+                alt=""
+                aria-hidden="true"
+                width={32}
+                height={32}
+              />
               <h1 className="app-title">Wi-Fi Access Point Database</h1>
             </a>
           </div>
