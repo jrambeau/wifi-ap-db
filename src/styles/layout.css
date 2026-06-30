@@ -4,6 +4,13 @@
   padding: 0;
 }
 
+html {
+  /* Empêche iOS Safari de gonfler automatiquement la police des colonnes
+     larges à texte long (ex. "Antenna Type") sur mobile. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body {
   font-family: var(--font-family-base);
   font-size: var(--font-size-base);

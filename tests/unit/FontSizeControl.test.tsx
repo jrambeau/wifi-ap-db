@@ -68,11 +68,15 @@ describe('FontSizeControl', () => {
   it('disables decrease button at minimum level', () => {
     render(<FontSizeControl />);
     const decreaseBtn = screen.getByLabelText('Decrease font size');
-    
-    // Go to minimum (-2)
+
+    // Still enabled at -2 (12px), the previous floor
     fireEvent.click(decreaseBtn);
     fireEvent.click(decreaseBtn);
-    
+    expect(decreaseBtn).not.toBeDisabled();
+
+    // Go to the new minimum (-4 = 10px)
+    fireEvent.click(decreaseBtn);
+    fireEvent.click(decreaseBtn);
     expect(decreaseBtn).toBeDisabled();
   });
 
@@ -130,17 +134,21 @@ describe('FontSizeControl', () => {
     expect(screen.getByText('A+')).toBeInTheDocument();
   });
 
-  it('has correct range of font sizes (12px to 16px)', () => {
+  it('has correct range of font sizes (10px to 16px)', () => {
     render(<FontSizeControl />);
     const decreaseBtn = screen.getByLabelText('Decrease font size');
     const increaseBtn = screen.getByLabelText('Increase font size');
-    
-    // Go to minimum
+
+    // Go to minimum (-4)
     fireEvent.click(decreaseBtn);
     fireEvent.click(decreaseBtn);
-    expect(document.documentElement.style.fontSize).toBe('12px');
-    
-    // Go to maximum
+    fireEvent.click(decreaseBtn);
+    fireEvent.click(decreaseBtn);
+    expect(document.documentElement.style.fontSize).toBe('10px');
+
+    // Go to maximum (+2)
+    fireEvent.click(increaseBtn);
+    fireEvent.click(increaseBtn);
     fireEvent.click(increaseBtn);
     fireEvent.click(increaseBtn);
     fireEvent.click(increaseBtn);

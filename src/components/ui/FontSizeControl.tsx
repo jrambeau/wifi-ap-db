@@ -4,12 +4,14 @@ import { IconTextSize } from '../icons';
 import './FontSizeControl.css';
 
 const DEFAULT_LEVEL = 0; // Niveau par défaut (0 = taille normale)
-const MIN_LEVEL = -2;    // Minimum: -2 niveaux
+const MIN_LEVEL = -4;    // Minimum: -4 niveaux (utile sur mobile)
 const MAX_LEVEL = 2;     // Maximum: +2 niveaux
 const STORAGE_KEY = 'ap-catalog-font-size-level';
 
 // Mapping des niveaux vers les tailles de police en pixels
 const FONT_SIZE_MAP: Record<number, number> = {
+  '-4': 10,  // Minuscule
+  '-3': 11,  // Très très petit
   '-2': 12,  // Très petit
   '-1': 13,  // Petit
   '0': 14,   // Normal (défaut)
