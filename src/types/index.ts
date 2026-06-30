@@ -6,6 +6,7 @@ export interface APMachine {
   antenna_type: string;
   indoor_outdoor: string;
   generation: string;
+  chipset: string;
   product_positioning: string;
   total_phy_serving_radios: string;
   concurrent_serving_radios: string;
@@ -30,6 +31,9 @@ export interface APMachine {
   bluetooth: string;
   zigbee: string;
   minimum_software_version: string;
+  maximum_software_version: string;
+  end_of_sale_date: string;
+  end_of_support_date: string;
   public_price_usd: string;
   public_price_eur: string;
   comments: string;

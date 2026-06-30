@@ -76,41 +76,40 @@ export default function TableView({
   const [activeFilterColumn, setActiveFilterColumn] = useState<string | null>(null);
   const filterButtonRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
   const [visibleColumns, setVisibleColumns] = useState<string[]>(() => {
+    const currentKeys = defaultColumns.map(c => c.key as string);
     const saved = localStorage.getItem(STORAGE_KEY_VISIBLE_COLUMNS);
     if (saved) {
       try {
-        const parsed = JSON.parse(saved);
-        // Vérifier si les colonnes sauvegardées correspondent aux colonnes actuelles
-        const currentKeys = defaultColumns.map(c => c.key as string);
-        const allKeysExist = parsed.every((key: string) => currentKeys.includes(key));
-        if (allKeysExist) {
-          return parsed;
-        }
+        const parsed: string[] = JSON.parse(saved);
+        // Conserver les préférences existantes, retirer les colonnes disparues
+        // et afficher par défaut les colonnes nouvellement ajoutées.
+        const known = parsed.filter(key => currentKeys.includes(key));
+        const added = currentKeys.filter(key => !parsed.includes(key));
+        return [...known, ...added];
       } catch {
         // Si erreur de parsing, réinitialiser
       }
     }
     // Par défaut : toutes les colonnes visibles
-    return defaultColumns.map(c => c.key as string);
+    return currentKeys;
   });
   const [columnOrder, setColumnOrder] = useState<string[]>(() => {
+    const currentKeys = defaultColumns.map(c => c.key as string);
     const saved = localStorage.getItem(STORAGE_KEY_COLUMN_ORDER);
     if (saved) {
       try {
-        const parsed = JSON.parse(saved);
-        // Vérifier si l'ordre sauvegardé correspond aux colonnes actuelles
-        const currentKeys = defaultColumns.map(c => c.key as string);
-        const allKeysExist = parsed.every((key: string) => currentKeys.includes(key));
-        if (allKeysExist && parsed.length === currentKeys.length) {
-          // Forcer les colonnes pinnées en premier
-          return ensurePinnedColumnsFirst(parsed, defaultColumns);
-        }
+        const parsed: string[] = JSON.parse(saved);
+        // Conserver l'ordre personnalisé, retirer les colonnes disparues et
+        // ajouter les colonnes nouvellement créées à la fin.
+        const known = parsed.filter(key => currentKeys.includes(key));
+        const added = currentKeys.filter(key => !parsed.includes(key));
+        return ensurePinnedColumnsFirst([...known, ...added], defaultColumns);
       } catch {
         // Si erreur de parsing, réinitialiser
       }
     }
     // Par défaut : ordre défini dans columns.ts (colonnes pinnées déjà en premier)
-    return defaultColumns.map(c => c.key as string);
+    return ensurePinnedColumnsFirst(currentKeys, defaultColumns);
   });
 
   // Ensure column order is always correct with pinned columns first

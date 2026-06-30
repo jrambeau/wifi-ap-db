@@ -35,6 +35,10 @@
         "type": "string",
         "description": "WiFi generation (e.g., Wi-Fi 6, Wi-Fi 6E, Wi-Fi 7)"
       },
+      "chipset": {
+        "type": "string",
+        "description": "Wireless chipset / SoC"
+      },
       "product_positioning": {
         "type": "string",
         "description": "Product positioning (e.g., Entry-level, Mid-range, Enterprise)"
@@ -130,6 +134,18 @@
       "minimum_software_version": {
         "type": "string",
         "description": "Minimum software version required"
+      },
+      "maximum_software_version": {
+        "type": "string",
+        "description": "Maximum software version supported"
+      },
+      "end_of_sale_date": {
+        "type": "string",
+        "description": "End of sale date"
+      },
+      "end_of_support_date": {
+        "type": "string",
+        "description": "End of support date"
       },
       "public_price_usd": {
         "type": "string",
