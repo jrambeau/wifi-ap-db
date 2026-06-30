@@ -1,8 +1,11 @@
 import type { ColumnConfig } from '../types';
 
 export const columns: ColumnConfig[] = [
-  { key: 'vendor', label: 'Vendor', sortable: true, filterable: true, pinned: true, width: 156 },
-  { key: 'model', label: 'Model', sortable: true, filterable: true, pinned: true, width: 156 },
+  // Vendor & Model : pas de largeur fixe — elles se dimensionnent au contenu
+  // (table-layout: auto). L'offset sticky de Model est calculé dynamiquement
+  // dans TableView (mesure de la largeur rendue de Vendor).
+  { key: 'vendor', label: 'Vendor', sortable: true, filterable: true, pinned: true },
+  { key: 'model', label: 'Model', sortable: true, filterable: true, pinned: true },
   { key: 'reference', label: 'Reference', sortable: true, filterable: true, width: 156 },
   { key: 'antenna_type', label: 'Antenna Type', sortable: true, filterable: true, width: 600 },
   { key: 'indoor_outdoor', label: 'Indoor/Outdoor', sortable: true, filterable: true, width: 186 },

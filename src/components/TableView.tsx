@@ -294,6 +294,28 @@ export default function TableView({
     .map(key => defaultColumns.find(c => c.key === key))
     .filter((c): c is ColumnConfig => c !== undefined && visibleColumns.includes(c.key));
 
+  // Les colonnes pinnées se dimensionnent au contenu. L'offset sticky `left` de
+  // la 2e colonne pinnée doit égaler la largeur rendue de la 1re : on la mesure
+  // en continu (police, données, zoom) et on l'expose via une variable CSS.
+  const tableRef = useRef<HTMLTableElement>(null);
+  useEffect(() => {
+    const table = tableRef.current;
+    if (!table) return;
+    const firstPinned = table.querySelector<HTMLElement>(
+      'thead th.column-pinned:nth-child(1)'
+    );
+    if (!firstPinned) return;
+
+    const update = () => {
+      table.style.setProperty('--pinned-col2-left', `${firstPinned.offsetWidth}px`);
+    };
+    update();
+
+    const observer = new ResizeObserver(update);
+    observer.observe(firstPinned);
+    return () => observer.disconnect();
+  }, [orderedColumns]);
+
   return (
     <div className="table-view">
       {/* Toolbar */}
@@ -387,16 +409,14 @@ export default function TableView({
 
       {/* Table Container */}
       <div className="table-container">
-        <table className="ap-table">
+        <table className="ap-table" ref={tableRef}>
           <thead>
             <tr>
               {orderedColumns.map((column) => {
-                const width = column.pinned && column.width ? `${column.width}px` : undefined;
                 return (
                 <th
                   key={column.key}
                   className={column.pinned ? 'column-pinned' : ''}
-                  style={width ? { width, minWidth: width, maxWidth: width } : undefined}
                 >
                   <div className="th-content">
                     {column.filterable && (

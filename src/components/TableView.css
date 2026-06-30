@@ -283,10 +283,12 @@
   z-index: 21;
 }
 
-/* Deuxième colonne pinnée (Model) - left: largeur colonne 1 */
+/* Deuxième colonne pinnée (Model) - left = largeur rendue de la 1re colonne,
+   calculée dynamiquement dans TableView (--pinned-col2-left). Le fallback ne
+   sert que le tout premier rendu avant la mesure. */
 .ap-table th.column-pinned:nth-child(2),
 .ap-table td.column-pinned:nth-child(2) {
-  left: 156px; /* Width of first pinned column (Vendor) */
+  left: var(--pinned-col2-left, 120px);
   background: var(--color-bg-default);
 }
 
