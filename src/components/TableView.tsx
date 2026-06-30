@@ -59,7 +59,7 @@ export default function TableView({
   const [columnFilters, setColumnFilters] = useState<ColumnFilters>({});
   
   // Sorting
-  const [sortBy, setSortBy] = useState<keyof APMachine | null>(null);
+  const [sortBy, setSortBy] = useState<keyof APMachine | null>('vendor');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
   
   // Pagination
@@ -205,6 +205,11 @@ export default function TableView({
         comparison = aVal - bVal;
       } else {
         comparison = String(aVal).localeCompare(String(bVal));
+      }
+
+      // Critère secondaire : à valeur égale, classer par modèle (alphabétique)
+      if (comparison === 0 && sortBy !== 'model') {
+        comparison = String(a.model ?? '').localeCompare(String(b.model ?? ''));
       }
 
       return sortOrder === 'asc' ? comparison : -comparison;

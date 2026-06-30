@@ -83,11 +83,13 @@ describe('Column widths validation', () => {
     console.log('[TEST WIDTH GENERATION] ✅ Generation column width is sufficient');
   });
 
-  it('all columns should have a defined width', () => {
-    console.log('[TEST WIDTH DEFINED] Checking all columns have defined widths');
-    
-    const columnsWithoutWidth = columns.filter(col => !col.width);
-    
+  it('all non-pinned columns should have a defined width', () => {
+    console.log('[TEST WIDTH DEFINED] Checking non-pinned columns have defined widths');
+
+    // Les colonnes pinnées (Vendor, Model) se dimensionnent au contenu
+    // (table-layout: auto) et n'ont donc volontairement pas de largeur fixe.
+    const columnsWithoutWidth = columns.filter(col => !col.pinned && !col.width);
+
     console.log(`[TEST WIDTH DEFINED] Columns without width: ${columnsWithoutWidth.length}`);
     
     if (columnsWithoutWidth.length > 0) {
@@ -103,8 +105,9 @@ describe('Column widths validation', () => {
     console.log('[TEST WIDTH LIMITS] Checking column width limits');
     
     const outOfBounds = columns.filter(col => {
-      const width = col.width || 0;
-      return width < 100 || width > 800;
+      // Colonnes auto-dimensionnées (pinnées) : pas de largeur fixe à borner.
+      if (col.width == null) return false;
+      return col.width < 100 || col.width > 800;
     });
     
     console.log(`[TEST WIDTH LIMITS] Columns out of bounds: ${outOfBounds.length}`);
