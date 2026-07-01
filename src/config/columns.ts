@@ -23,7 +23,7 @@ export const columns: ColumnConfig[] = [
   { key: 'max_poe_consumption_w', label: 'Max PoE Consumption (W)', sortable: true, filterable: false, width: 300 },
   { key: 'limited_capabilities_poe_bt', label: 'Limited PoE .3bt 45W', sortable: true, filterable: true, width: 303 },
   { key: 'limited_capabilities_poe_at', label: 'Limited PoE .3at 30W', sortable: true, filterable: true, width: 680 },
-  { key: 'limited_capabilities_poe_af', label: 'Limited PoE .af 15W', sortable: true, filterable: true, width: 780 },
+  { key: 'limited_capabilities_poe_af', label: 'Limited PoE .3af 15W', sortable: true, filterable: true, width: 780 },
   { key: 'ethernet1', label: 'Ethernet 1', sortable: true, filterable: true, width: 160 },
   { key: 'ethernet2', label: 'Ethernet 2', sortable: true, filterable: true, width: 470 },
   { key: 'weight_kg', label: 'Weight (kg)', sortable: true, filterable: false, width: 160 },
