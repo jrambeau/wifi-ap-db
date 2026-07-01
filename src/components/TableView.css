@@ -228,6 +228,12 @@
   transition: background-color var(--transition-fast);
 }
 
+/* Zebra striping : une ligne sur deux légèrement grisée.
+   Placé avant hover/sélection pour que ces états gardent la priorité. */
+.ap-table tbody tr:nth-child(even) {
+  background: var(--color-bg-stripe);
+}
+
 .ap-table tbody tr:hover {
   background: var(--color-bg-subtle);
 }
@@ -299,6 +305,12 @@
 .ap-table thead th.column-pinned:nth-child(2) {
   background: var(--color-bg-subtle);
   z-index: 21;
+}
+
+/* Zebra striping des colonnes pinnées (leur fond est opaque, il faut donc
+   le répliquer). Avant les règles hover/sélection pour préserver la priorité. */
+.ap-table tbody tr:nth-child(even) td.column-pinned {
+  background: var(--color-bg-stripe);
 }
 
 /* Colonnes pinnées héritent de la couleur de hover/sélection de la ligne */

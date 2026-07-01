@@ -3,6 +3,7 @@
   --color-bg-default: #ffffff;
   --color-bg-subtle: #f6f8fa;
   --color-bg-muted: #f0f3f6;
+  --color-bg-stripe: #fafbfc; /* zebra striping des lignes (plus léger que subtle) */
   --color-bg-overlay: rgba(0, 0, 0, 0.05);
   
   /* Legacy aliases */
