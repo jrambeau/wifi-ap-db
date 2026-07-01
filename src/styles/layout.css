@@ -22,7 +22,8 @@ body {
 }
 
 #root {
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh; /* gère la barre d'adresse mobile (viewport dynamique) */
   display: flex;
   flex-direction: column;
 }

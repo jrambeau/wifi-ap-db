@@ -1,7 +1,8 @@
 .app {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  flex: 1;
+  min-height: 0;
   background: var(--color-bg-default);
 }
 
@@ -87,6 +88,7 @@
 
 .app-main {
   flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   overflow: hidden;

@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  min-height: 0;
   background: var(--color-bg-default);
   padding: var(--spacing-3);
 }
@@ -32,6 +33,7 @@
 /* Table Container */
 .table-container {
   flex: 1;
+  min-height: 0;
   overflow: auto;
   background: var(--color-bg-default);
   border: 1px solid var(--color-border-default);
@@ -50,7 +52,9 @@
 .ap-table thead {
   position: sticky;
   top: 0;
-  z-index: 10;
+  /* Au-dessus des colonnes pinnées du corps (z-index 20) pour que l'en-tête
+     reste visible quand les lignes défilent en dessous. */
+  z-index: 30;
   background: var(--color-bg-subtle);
 }
 
