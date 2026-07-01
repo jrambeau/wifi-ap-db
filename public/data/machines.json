@@ -3644,7 +3644,7 @@
     "vendor": "Juniper Mist",
     "model": "AP24",
     "reference": "AP24-WW",
-    "antenna_type": "Internal : omni downtilt",
+    "antenna_type": "Internal : omni horizontal (wall plate)",
     "indoor_outdoor": "Indoor",
     "generation": "Wi-Fi 6E (802.11ax)",
     "chipset": "",
